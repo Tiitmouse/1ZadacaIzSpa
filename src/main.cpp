@@ -5,7 +5,7 @@
 #include "bumblebee.h"
 int main()
 {
-    sf::RenderWindow window = sf::RenderWindow{ { 1920u, 1080u }, "CMake SFML Project" };
+    sf::RenderWindow window = sf::RenderWindow{ { 1920u, 780 }, "CMake SFML Project" };
     window.setFramerateLimit(144);
     Background bg(window);
     Flower cvijet(window);

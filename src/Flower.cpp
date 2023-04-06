@@ -46,7 +46,7 @@ Flower::Flower(sf::RenderWindow &prozor) {
     list2.move(middle_stem() - sf::Vector2f(30, 0));
 
 
-    move(0, 100);
+    move(80, 100);
 }
 
 void Flower::draw() {

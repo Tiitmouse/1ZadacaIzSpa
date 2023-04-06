@@ -33,13 +33,13 @@ bumblebee::bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(
     body.setOutlineColor(sf::Color(150, 150, 150, 255));
     body.move(1200, 80);
     //first wing
-    wing1.setFillColor(sf::Color::Transparent);
+    wing1.setFillColor(sf::Color(0, 150, 200, 100));
     wing1.setOutlineThickness(2.f);
     wing1.setOutlineColor(sf::Color::Cyan);
     wing1.move(1250, 65);
     wing1.rotate(330);
     //second wing
-    wing2.setFillColor(sf::Color::Transparent);
+    wing2.setFillColor(sf::Color(0, 150, 200, 100));
     wing2.setOutlineThickness(2.f);
     wing2.setOutlineColor(sf::Color::Cyan);
     wing2.move(1235, 80);
@@ -52,7 +52,7 @@ bumblebee::bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(
     head.move(1170, 80);
     //rotating point
     rotatingPoint.setRadius(4.f);
-    rotatingPoint.setFillColor(sf::Color::White);
+    rotatingPoint.setFillColor(sf::Color::Transparent);
     rotatingPoint.move(1244, 110);
 
 
