@@ -6,6 +6,7 @@
 
 Flower::Flower(sf::RenderWindow &prozor) {
     this->prozor = &prozor;
+
     veliki.setRadius(100.f);
     veliki.setFillColor(sf::Color::Yellow);
     veliki.setPosition(100.f, 100.f);
@@ -94,3 +95,5 @@ sf::Vector2<float> Flower::middle_stem() {
     st -= sf::Vector2f(8, 0);
     return st;
 }
+
+

@@ -1,11 +1,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Background.h"
 #include "Flower.h"
 #include "bumblebee.h"
 int main()
 {
     sf::RenderWindow window = sf::RenderWindow{ { 1920u, 1080u }, "CMake SFML Project" };
     window.setFramerateLimit(144);
+    Background bg(window);
     Flower cvijet(window);
     bumblebee Marko(window,cvijet.middle());
 
@@ -21,6 +23,7 @@ int main()
         }
 
         window.clear();
+        bg.draw();
         cvijet.draw();
         Marko.draw();
         window.display();

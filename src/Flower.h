@@ -19,6 +19,7 @@ private:
     sf::RenderWindow *prozor;
     int laticecounter=0;
 
+
 public:
     Flower(sf::RenderWindow &prozor);
     void draw();

@@ -5,7 +5,7 @@
 #include "bumblebee.h"
 
 void bumblebee::load_texture() {
-    if (!body_texture.loadFromFile("marko_fur.jpg")) {
+    if (!body_texture.loadFromFile("marko_fur.JPG")) {
         throw std::exception();
     }
     if (!face_texture.loadFromFile("marko_face.png")) {

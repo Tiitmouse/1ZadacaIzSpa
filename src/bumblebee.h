@@ -13,6 +13,7 @@
 
 class bumblebee {
 private:
+    void load_texture();
     sf::RenderWindow* window;
     EllipseShape body,wing1,wing2;
     sf::CircleShape head,rotatingPoint;
@@ -23,7 +24,6 @@ private:
     float angle = 0;
     float stopMarko = 0;
     bool circle = false;
-    void load_texture();
 public:
     bumblebee(sf::RenderWindow &target);
     bumblebee(sf::RenderWindow &target, sf::Vector2<float> stoppingPoint);
