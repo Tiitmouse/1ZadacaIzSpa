@@ -22,46 +22,54 @@ Flower::Flower(sf::RenderWindow &prozor) {
 
     stem.setSize(sf::Vector2f(400.f, 16.f));
     stem.rotate(90);
-    stem.move(middle()+sf::Vector2f(8, 0));
+    stem.move(middle() + sf::Vector2f(8, 0));
     stem.setFillColor(sf::Color::Green);
 
     list1.setFillColor(sf::Color::Green);
     list1.setPointCount(4);
-    list1.setPoint(0, sf::Vector2f(0.f,230.f));
+    list1.setPoint(0, sf::Vector2f(0.f, 230.f));
     list1.setPoint(1, sf::Vector2f(100.f, 150.f));
     list1.setPoint(2, sf::Vector2f(270.f, 110.f));
     list1.setPoint(3, sf::Vector2f(150.f, 200.f));
     list1.move(middle_stem());
 
-    list2.setPosition(0,0);
+    list2.setPosition(0, 0);
 
     list2.setFillColor(sf::Color::Green);
     list2.setPointCount(4);
-    list2.setPoint(0, sf::Vector2f(0.f,230.f));
+    list2.setPoint(0, sf::Vector2f(0.f, 230.f));
     list2.setPoint(1, sf::Vector2f(100.f, 150.f));
     list2.setPoint(2, sf::Vector2f(270.f, 110.f));
     list2.setPoint(3, sf::Vector2f(150.f, 200.f));
-    list2.rotate(list2.getRotation()+ 60);
-    list2.move(middle_stem() - sf::Vector2f(30,0));
+    list2.rotate(list2.getRotation() + 60);
+    list2.move(middle_stem() - sf::Vector2f(30, 0));
 
 }
 
-void Flower::draw()  {
-
-    prozor->draw(stem);
-    if(sat.getElapsedTime().asMilliseconds() >= 100)
-    prozor->draw(veliki);
-
-    for (auto &latica: latice) {
-        prozor->draw(latica);
+void Flower::draw() {
+    if (sat.getElapsedTime().asMilliseconds() >= 700) {
+        prozor->draw(stem);
     }
-    prozor->draw(list1);
-    prozor->draw(list2);
+    if (sat.getElapsedTime().asMilliseconds() >= 1400) {
+        prozor->draw(veliki);
+        if (satlatica.getElapsedTime().asMilliseconds()>= 300 && sat.getElapsedTime().asMilliseconds() >= 2000) {
+            if (laticecounter < 6) laticecounter++;
+            satlatica.restart();
+        }
+        for (int j = 0; j < laticecounter; j++) prozor->draw(latice[j]);
+    }
+    if (sat.getElapsedTime().asMilliseconds() >= 4000) {
+        prozor->draw(list1);
+    }
+    if (sat.getElapsedTime().asMilliseconds() >= 4500) {
+        prozor->draw(list2);
+    }
+
 
 
 }
 
-sf::Vector2<float> Flower::middle() {
+sf::Vector2<float> Flower::middle() const{
 
     sf::Vector2 sredina = veliki.getPosition();
     sredina.x += veliki.getRadius();
@@ -70,17 +78,17 @@ sf::Vector2<float> Flower::middle() {
 }
 
 void Flower::move(int x, int y) {
-    list1.move(x,y);
-    list2.move(x,y);
-    stem.move(x,y);
-    veliki.move(x,y);
-    for(auto &latica: latice){
-        latica.move(x,y);
+    list1.move(x, y);
+    list2.move(x, y);
+    stem.move(x, y);
+    veliki.move(x, y);
+    for (auto &latica: latice) {
+        latica.move(x, y);
     }
 }
 
 sf::Vector2<float> Flower::middle_stem() {
     auto st = stem.getPosition();
-    st -= sf::Vector2f(8,0);
+    st -= sf::Vector2f(8, 0);
     return st;
 }

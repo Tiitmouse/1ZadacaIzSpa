@@ -6,8 +6,9 @@ int main()
 {
     sf::RenderWindow window = sf::RenderWindow{ { 1920u, 1080u }, "CMake SFML Project" };
     window.setFramerateLimit(144);
-    bumblebee Marko(window);
     Flower cvijet(window);
+    bumblebee Marko(window,cvijet.middle());
+
     cvijet.move(300.f,50.f);
     while (window.isOpen())
     {
@@ -20,8 +21,8 @@ int main()
         }
 
         window.clear();
-        Marko.draw();
         cvijet.draw();
+        Marko.draw();
         window.display();
     }
 }

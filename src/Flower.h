@@ -1,5 +1,5 @@
 //
-// Created by Lorena Kovačić on 29.03.2023..
+// Created by Lorena Kovacic on 29.03.2023..
 //
 
 #ifndef CMAKESFMLPROJECT_FLOWER_H
@@ -12,16 +12,18 @@ class Flower{
 private:
     sf::CircleShape veliki;
     std::array<sf::CircleShape, 6> latice;
-    sf::Vector2<float> middle();
     sf::Vector2<float> middle_stem();
     sf::RectangleShape stem;
     sf::ConvexShape list1, list2;
-    sf::Clock sat;
+    sf::Clock sat, satlatica;
     sf::RenderWindow *prozor;
+    int laticecounter=0;
+
 public:
     Flower(sf::RenderWindow &prozor);
     void draw();
     void move(int x, int y);
+    sf::Vector2<float> middle() const;
 };
 
 

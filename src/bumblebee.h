@@ -1,5 +1,5 @@
 //
-// Created by Lorena Kovačić on 31.03.2023..
+// Created by Lorena Kovacic on 31.03.2023..
 //
 
 #ifndef CMAKESFMLPROJECT_BUMBLEBEE_H
@@ -15,12 +15,20 @@ class bumblebee {
 private:
     sf::RenderWindow* window;
     EllipseShape body,wing1,wing2;
-    sf::CircleShape head;
+    sf::CircleShape head,rotatingPoint;
     sf::Texture body_texture,face_texture;
+    sf::Vector2<float> middle();
+    sf::Transform middleMarko;
+    sf::Clock sat,sat2;
+    float angle = 0;
+    float stopMarko = 0;
+    bool circle = false;
     void load_texture();
 public:
     bumblebee(sf::RenderWindow &target);
+    bumblebee(sf::RenderWindow &target, sf::Vector2<float> stoppingPoint);
     void draw();
+    void drawMarko();
     void move(int x, int y);
 
 };
