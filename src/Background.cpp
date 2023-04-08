@@ -13,9 +13,9 @@ void Background::load_texture() {
 }
 
 Background::Background(sf::RenderWindow &prozor) {
-    try {load_texture();}
-    catch (std::exception & exc){
-       std::cout << exc.what();
+    try { load_texture(); }
+    catch (std::exception &exc) {
+        std::cout << exc.what();
     };
     this->prozor = &prozor;
 }

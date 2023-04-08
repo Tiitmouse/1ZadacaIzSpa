@@ -2,30 +2,25 @@
 #include "EllipseShape.h"
 
 
-EllipseShape::EllipseShape(const sf::Vector2f& radius) :
-        m_radius(radius)
-{
+EllipseShape::EllipseShape(const sf::Vector2f &radius) :
+        m_radius(radius) {
     update();
 }
 
-void EllipseShape::setRadius(const sf::Vector2f& radius)
-{
+void EllipseShape::setRadius(const sf::Vector2f &radius) {
     m_radius = radius;
     update();
 }
 
-const sf::Vector2f& EllipseShape::getRadius() const
-{
+const sf::Vector2f &EllipseShape::getRadius() const {
     return m_radius;
 }
 
-std::size_t EllipseShape::getPointCount() const
-{
+std::size_t EllipseShape::getPointCount() const {
     return 30; // fixed, but could be an attribute of the class if needed
 }
 
-sf::Vector2f EllipseShape::getPoint(std::size_t index) const
-{
+sf::Vector2f EllipseShape::getPoint(std::size_t index) const {
     static const float pi = 3.141592654f;
 
     float angle = index * 2 * pi / getPointCount() - pi / 2;

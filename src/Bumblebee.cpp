@@ -2,9 +2,9 @@
 // Created by Lorena Kovacic on 31.03.2023..
 //
 
-#include "bumblebee.h"
+#include "Bumblebee.h"
 
-void bumblebee::load_texture() {
+void Bumblebee::load_texture() {
     if (!body_texture.loadFromFile("marko_fur.JPG")) {
         throw std::exception();
     }
@@ -13,7 +13,7 @@ void bumblebee::load_texture() {
     }
 }
 
-bumblebee::bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(50.f, 40.f))),
+Bumblebee::Bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(50.f, 40.f))),
                                                  wing1(EllipseShape(sf::Vector2f(20.f, 10.f))),
                                                  wing2(EllipseShape(sf::Vector2f(20.f, 10.f))) {
     window = &target;
@@ -26,7 +26,6 @@ bumblebee::bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(
     }
 
     //body
-    //body.setFillColor(sf::Color::Yellow);
     body.setTexture(&body_texture);
     body.setTextureRect(sf::IntRect(10, 10, 400, 100));
     body.setOutlineThickness(5.f);
@@ -36,7 +35,7 @@ bumblebee::bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(
     wing1.setFillColor(sf::Color(0, 150, 200, 100));
     wing1.setOutlineThickness(2.f);
     wing1.setOutlineColor(sf::Color::Cyan);
-    wing1.move(1250, 65);
+    wing1.move(1250, 68);
     wing1.rotate(330);
     //second wing
     wing2.setFillColor(sf::Color(0, 150, 200, 100));
@@ -55,18 +54,17 @@ bumblebee::bumblebee(sf::RenderWindow &target) : body(EllipseShape(sf::Vector2f(
     rotatingPoint.setFillColor(sf::Color::Transparent);
     rotatingPoint.move(1244, 110);
 
-
 }
 
-bumblebee::bumblebee(sf::RenderWindow &target, sf::Vector2<float> stoppingPoint) : bumblebee(target){
-    stopMarko = stoppingPoint.x + 200;
+Bumblebee::Bumblebee(sf::RenderWindow &target, sf::Vector2<float> stoppingPoint) : Bumblebee(target) {
+    stopMarko = stoppingPoint.x;
 }
 
-void bumblebee::draw() {
+void Bumblebee::draw() {
     drawMarko();
 }
 
-void bumblebee::move(int x, int y) {
+void Bumblebee::move(int x, int y) {
     body.move(x, y);
     wing1.move(x, y);
     wing2.move(x, y);
@@ -74,35 +72,61 @@ void bumblebee::move(int x, int y) {
     rotatingPoint.move(x, y);
 }
 
-sf::Vector2<float> bumblebee::middle() {
+sf::Vector2<float> Bumblebee::middle() {
     sf::Vector2 sredina = rotatingPoint.getPosition();
     sredina.x += rotatingPoint.getRadius();
     sredina.y += rotatingPoint.getRadius();
     return sredina;
 }
 
-void bumblebee::drawMarko() {
+void Bumblebee::drawMarko() {
 
-    if (middle().x < 1000 && middle().x > 900) {circle = true;}
-    else if (angle >= 360){ circle = false;}
+    if (middle().x < 1200 && middle().x > 1000) { fullCircleRotation = true; }
+    else if (angle >= 360) {
+        fullCircleRotation = false;
+        angle = 0;
+    }
+    if (middle().x < 500 && middle().x > 400) { fullCircleRotation = true; }
+    else if (angle >= 360) { fullCircleRotation = false; }
 
-    if (sat.getElapsedTime().asMilliseconds() >= 5000) {
+    if (satStart.getElapsedTime().asMilliseconds() >= 5000) {
         window->draw(body, middleMarko);
         window->draw(wing1, middleMarko);
         window->draw(head, middleMarko);
-        window->draw(wing2, middleMarko);
-        window->draw(rotatingPoint, middleMarko);
-
-        if (sat2.getElapsedTime().asMilliseconds() >= 30 && middle().x > stopMarko) {
+        flap();
+        if (satRotation.getElapsedTime().asMilliseconds() >= 30 && middle().x > stopMarko) {
             move(-4, 1);
-            if (circle) {
+            if (fullCircleRotation) {
                 middleMarko.rotate(10, rotatingPoint.getPosition());
                 angle = angle + 10;
             }
 
-            sat2.restart();
+            satRotation.restart();
         }
     }
+}
+
+void Bumblebee::flap() {
+
+    if (wing1.getRotation() <= 300) {
+        wingFlaping = true;
+    } else if (wing1.getRotation() >= 330) wingFlaping = false;
+
+    if (satWings.getElapsedTime().asMicroseconds() >= 5) {
+        if (wingFlaping) {
+            wing1.rotate(1);
+            wing2.rotate(-1);
+        } else {
+            wing1.rotate(-1);
+            wing2.rotate(1);
+        }
+
+        window->draw(wing1, middleMarko);
+        window->draw(wing2, middleMarko);
+
+        satWings.restart();
+    }
+
 }
 
 

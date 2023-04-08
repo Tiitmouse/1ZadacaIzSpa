@@ -55,11 +55,11 @@ void Flower::draw() {
     }
     if (sat.getElapsedTime().asMilliseconds() >= 1400) {
         prozor->draw(veliki);
-        if (satlatica.getElapsedTime().asMilliseconds()>= 300 && sat.getElapsedTime().asMilliseconds() >= 2000) {
-            if (laticecounter < 6) laticecounter++;
+        if (satlatica.getElapsedTime().asMilliseconds() >= 300 && sat.getElapsedTime().asMilliseconds() >= 2000) {
+            if (showLaticeCounter < 6) showLaticeCounter++;
             satlatica.restart();
         }
-        for (int j = 0; j < laticecounter; j++) prozor->draw(latice[j]);
+        for (int j = 0; j < showLaticeCounter; j++) prozor->draw(latice[j]);
     }
     if (sat.getElapsedTime().asMilliseconds() >= 4000) {
         prozor->draw(list1);
@@ -69,10 +69,9 @@ void Flower::draw() {
     }
 
 
-
 }
 
-sf::Vector2<float> Flower::middle() const{
+sf::Vector2<float> Flower::middle() const {
 
     sf::Vector2 sredina = veliki.getPosition();
     sredina.x += veliki.getRadius();
